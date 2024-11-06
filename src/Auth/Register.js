@@ -58,7 +58,7 @@ function Register() {
                     <button id = 'registerBtn' type="submit">Register</button>
                 </form>
                 <p>
-                    Already have an account? <a href="/login">Log in</a>
+                    <b>Already have an account? <a href="/login" style = {{color: 'blue'}}>Log in</a></b>
                 </p>
             </div>
         </div>

@@ -1,8 +1,13 @@
+
 #loginForm, #registerForm{
     display: flex;
     flex-direction: column;
     width: 90%;
     padding: 20px;
+    background-image: url('/public/bugs.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 #loginComp, #registerComp{
@@ -13,6 +18,7 @@
     background-color: #f4f7fa;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 30%;
+    
 }
 
 input[type="email"], input[type="password"] {
@@ -55,4 +61,46 @@ input[type="email"]:focus, input[type="password"]:focus {
 
 h2, p{
     margin-left: 8%;
+}
+
+#forgotDiv{
+    margin-left: 33%;
+    text-align: left;
+    width: 30%;
+    
+}
+
+#forgotForm{
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #f4f7fa;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+#forgotBtn, #resetBtn{
+   margin-top: 5px;
+   margin-bottom: 5px;
+   padding: 14px;
+   font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    width: 100%; /* Full width */
+    transition: background-color 0.3s ease;
+}
+
+#forgotBtn:hover, #resetBtn:hover {
+    background-color: #0056b3;
+}
+
+/* New styling for the message */
+#message {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #28a745; /* Green color for success */
+    font-weight: bold;
 }
