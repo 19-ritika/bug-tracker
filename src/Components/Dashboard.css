@@ -1,0 +1,84 @@
+/* src/components/Dashboard.css */
+.dashboard {
+    padding: 1rem;
+    text-align: center;
+}
+
+.addBugButton {
+    background-color: #28a745; /* Green color */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-bottom: 1rem; /* Space between button and table */
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    float: left;
+}
+
+.addBugButton:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+.bugTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.bugTable th, .bugTable td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.bugTable th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.bugTable tr:nth-child(even) {
+    background-color: #f9f9f9; /* Alternate row color */
+}
+
+.bugTable tr:hover {
+    background-color: #f1f1f1; /* Highlight on hover */
+}
+
+/* Align the edit and delete icons */
+td .editButton, td .deleteButton {
+    margin-right: 5px; /* Space between icons */
+    font-size: 18px; /* Size of icons */
+    cursor: pointer; /* Pointer cursor for interactivity */
+    vertical-align: middle; /* Align icons vertically in the row */
+    border: None;
+}
+
+td .editIcon:hover {
+    color: #007bff; /* Hover color for edit icon */
+}
+
+td .deleteIcon:hover {
+    color: #dc3545; /* Hover color for delete icon */
+}
+
+/* Optional: Style for the save and cancel buttons */
+.saveButton, .cancelButton {
+    font-size: 18px;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.saveButton {
+    color: green;
+    border: None;
+}
+
+.cancelButton {
+    color: red;
+    border: None;
+}
+
+.saveButton:hover, .cancelButton:hover {
+    opacity: 0.7; /* Slight transparency on hover */
+}

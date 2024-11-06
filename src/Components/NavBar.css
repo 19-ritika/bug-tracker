@@ -1,0 +1,42 @@
+/* Container for the navigation bar */
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: #649ad1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    cursor: pointer; /* Make logo clickable to go to the dashboard */
+}
+
+.image {
+    width: 40px; /* Adjust the size of the bug image */
+    height: 40px;
+    margin-right: 10px; /* Space between the icon and the text */
+}
+
+.title {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 0; /* Remove default margin from h2 */
+}
+
+.logoutButton {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.logoutButton:hover {
+    background-color: #0056b3;
+}

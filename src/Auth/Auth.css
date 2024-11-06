@@ -1,0 +1,58 @@
+#loginForm, #registerForm{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding: 20px;
+}
+
+#loginComp, #registerComp{
+    margin-top: 20px;
+    margin-left: 34%;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #f4f7fa;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 30%;
+}
+
+input[type="email"], input[type="password"] {
+    padding: 12px;
+    margin-bottom: 16px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+input[type="email"]:focus, input[type="password"]:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+/* Button Styling */
+#loginBtn, #registerBtn {
+    padding: 14px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    width: 100%; /* Full width */
+    transition: background-color 0.3s ease;
+}
+
+/* Button Hover and Active States */
+#loginBtn:hover, #registerBtn:hover {
+    background-color: #0056b3;
+}
+
+#loginBtn:active, #registerBtn:active {
+    background-color: #003f7f;
+}
+
+h2, p{
+    margin-left: 8%;
+}
