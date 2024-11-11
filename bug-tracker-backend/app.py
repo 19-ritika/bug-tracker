@@ -9,7 +9,7 @@ from bson import ObjectId
 load_dotenv()
 
 app = Flask(__name__, static_folder = 'build', static_url_path = '/build')
-CORS(app)
+CORS(app, resources = {r"/*": {"origins": "*"}})
 
 # Configure MongoDB URI from .env
 app.config["MONGO_URI"] = os.getenv("MONGO_URI")
