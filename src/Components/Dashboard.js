@@ -3,9 +3,9 @@ import AddBugForm from './AddBugForm';
 import './Dashboard.css';
 
 // Determine API base URL based on environment
-const API_BASE_URL = window.location.hostname === 'localhost'
-    ? 'http://localhost:5000'       // Local environment
-    : 'http://54.171.71.11:5000';   // EC2 environment
+const API_BASE_URL = process.env.NODE_ENV === 'production'
+    ? 'http://54.171.71.11:5000'  // EC2 production environment
+    : 'http://localhost:5000';      // Local development environment
 
 const Dashboard = () => {
     const [bugs, setBugs] = useState([]);
