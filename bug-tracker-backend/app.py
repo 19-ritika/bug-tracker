@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_pymongo import PyMongo
 from flask_cors import CORS
 import os
@@ -14,6 +14,22 @@ CORS(app)
 # Configure MongoDB URI from .env
 app.config["MONGO_URI"] = os.getenv("MONGO_URI")
 mongo = PyMongo(app)
+
+# Serve static files (React build)
+@app.route('/build/<path:path>')
+def serve_static_files(path):
+    return send_from_directory('build', path)
+
+# Serve React app (index.html) for any route not related to API
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve_react_app(path):
+    # Check if the request is for an API route, in your case they don't start with '/api/', so we just serve the React app
+    if path and os.path.exists(os.path.join(app.static_folder, path)):
+        # Serve the static file if it exists (like JS, CSS, images)
+        return send_from_directory(app.static_folder, path)
+    # Serve the index.html for all other routes (SPA fallback)
+    return send_from_directory(app.static_folder, 'index.html')
 
 # Add bug route
 @app.route('/add_bug', methods=['POST'])
@@ -111,11 +127,6 @@ def delete_bug(id):
         return jsonify({"message": "Bug deleted successfully"}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
-# Add this route to handle the root URL ("/")
-@app.route('/')
-def home():
-    return "Welcome to the Bug Tracker App!"
     
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
