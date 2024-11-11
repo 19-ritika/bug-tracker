@@ -111,6 +111,11 @@ def delete_bug(id):
         return jsonify({"message": "Bug deleted successfully"}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+# Add this route to handle the root URL ("/")
+@app.route('/')
+def home():
+    return "Welcome to the Bug Tracker App!"
     
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
