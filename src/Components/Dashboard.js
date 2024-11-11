@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import AddBugForm from './AddBugForm';
 import './Dashboard.css';
 
+// Determine API base URL based on environment
+const API_BASE_URL = window.location.hostname === 'localhost'
+    ? 'http://localhost:5000'       // Local environment
+    : 'http://54.171.71.11:5000';   // EC2 environment
+
 const Dashboard = () => {
     const [bugs, setBugs] = useState([]);
     const [showAddBugForm, setShowAddBugForm] = useState(false);
@@ -14,7 +19,7 @@ const Dashboard = () => {
     // Fetch bugs from the server
     const fetchBugs = async () => {
         try {
-            const response = await fetch('http://localhost:5000/get_bugs');
+            const response = await fetch(`${API_BASE_URL}/get_bugs`);
             if (response.ok) {
                 const data = await response.json();
                 setBugs(data); // Set the fetched bugs with the properly formatted ID
@@ -28,13 +33,12 @@ const Dashboard = () => {
 
     const addBug = async (bug) => {
         try {
-            const response = await fetch('http://localhost:5000/add_bug', {
+            const response = await fetch(`${API_BASE_URL}/add_bug`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(bug),
             });
             if (response.ok) {
-                // After adding the bug, fetch the updated bug list
                 fetchBugs();  // This will refresh the state and update the UI with the new bug list
                 setShowAddBugForm(false); // Optionally, hide the form after adding the bug
             } else {
@@ -63,7 +67,7 @@ const Dashboard = () => {
             const updatedBug = { ...bug, id: cleanedId };
     
             // Send the PUT request to update the bug
-            const response = await fetch(`http://localhost:5000/edit_bug/${cleanedId}`, {
+            const response = await fetch(`${API_BASE_URL}/edit_bug/${cleanedId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(updatedBug),
@@ -80,29 +84,25 @@ const Dashboard = () => {
         }
     };
 
-    // Delete bug
-    // Assuming you have the 'bugs' state initialized somewhere in your code
-const deleteBug = async (id) => {
-    try {
-        // Extract the 6-character ID from 'Bug - 93f44'
-        const bugId = id.split(' - ')[1];  // This gets '93f44' from 'Bug - 93f44'
-        
-        // Send the DELETE request to the backend with the cleaned ID
-        const response = await fetch(`http://localhost:5000/delete_bug/${bugId}`, {
-            method: 'DELETE',
-        });
-        
-        if (response.ok) {
-            // Remove the deleted bug from the UI
-            setBugs(bugs.filter((bug) => bug.id !== id));
-        } else {
-            console.error('Failed to delete bug:', response.statusText);
+    const deleteBug = async (id) => {
+        try {
+            // Extract the 6-character ID from 'Bug - 93f44'
+            const bugId = id.split(' - ')[1];  // This gets '93f44' from 'Bug - 93f44'
+            
+            // Send the DELETE request to the backend with the cleaned ID
+            const response = await fetch(`${API_BASE_URL}/delete_bug/${bugId}`, {
+                method: 'DELETE',
+            });
+            
+            if (response.ok) {
+                setBugs(bugs.filter((bug) => bug.id !== id));
+            } else {
+                console.error('Failed to delete bug:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error deleting bug:', error);
         }
-    } catch (error) {
-        console.error('Error deleting bug:', error);
-    }
-};
-
+    };
 
     return (
         <div className="dashboard">
