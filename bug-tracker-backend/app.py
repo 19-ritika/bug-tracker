@@ -12,7 +12,7 @@ load_dotenv()
 
 app = Flask(__name__, static_folder = 'build', static_url_path = '/build')
 # Initialize CSRF protection
-csrf = CSRFProtect(app)
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 allowed_origins = os.getenv("ALLOWED_ORIGINS", "").split(",")
 CORS(app, resources = {r"/*": {"origins": allowed_origins}})

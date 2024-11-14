@@ -5,7 +5,7 @@ import './Dashboard.css';
 // Determine API base URL based on environment
 const API_BASE_URL = process.env.NODE_ENV === 'production'
     ? 'http://54.171.71.11'  // EC2 production environment
-    : 'http://localhost:5000'; // Local development environment
+    : 'http://localhost:5000';  // Local development environment
 
 const Dashboard = () => {
     const [bugs, setBugs] = useState([]);
@@ -14,7 +14,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         fetchBugs();
-    }, []);
+    }, []); // Fetch bugs only once when the component mounts
 
     // Fetch bugs from the server
     const fetchBugs = async () => {
@@ -22,7 +22,7 @@ const Dashboard = () => {
             const response = await fetch(`${API_BASE_URL}/get_bugs`);
             if (response.ok) {
                 const data = await response.json();
-                setBugs(data);
+                setBugs(data); // Set the fetched bugs with the properly formatted ID
             } else {
                 console.error('Failed to fetch bugs:', response.statusText);
             }
@@ -39,8 +39,8 @@ const Dashboard = () => {
                 body: JSON.stringify(bug),
             });
             if (response.ok) {
-                fetchBugs();
-                setShowAddBugForm(false);
+                fetchBugs();  // This will refresh the state and update the UI with the new bug list
+                setShowAddBugForm(false); // Optionally, hide the form after adding the bug
             } else {
                 console.error('Failed to add bug:', response.statusText);
             }
@@ -51,26 +51,31 @@ const Dashboard = () => {
 
     const handleCancel = () => {
         setShowAddBugForm(false);
-        setEditingBug(null);
+        setEditingBug(null); // Reset editing state
     };
 
     const startEditing = (bug) => {
-        setEditingBug(bug);
+        setEditingBug(bug); // Set the bug as the one to edit
     };
 
     const saveEdit = async (bug) => {
         try {
-            const cleanedId = bug.id.split(' - ')[1];
+            // Clean the ID by removing the "Bug - " prefix
+            const cleanedId = bug.id.split(' - ')[1];  // This gets the 6-character ID like '93f44'
+    
+            // Prepare the updated bug data (including the cleaned ID)
             const updatedBug = { ...bug, id: cleanedId };
+    
+            // Send the PUT request to update the bug
             const response = await fetch(`${API_BASE_URL}/edit_bug/${cleanedId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(updatedBug),
             });
-
+    
             if (response.ok) {
-                fetchBugs();
-                setEditingBug(null);
+                fetchBugs(); // Refresh the bug list after the update
+                setEditingBug(null); // Stop editing
             } else {
                 console.error('Failed to edit bug:', response.statusText);
             }
@@ -81,11 +86,14 @@ const Dashboard = () => {
 
     const deleteBug = async (id) => {
         try {
-            const bugId = id.split(' - ')[1];
+            // Extract the 6-character ID from 'Bug - 93f44'
+            const bugId = id.split(' - ')[1];  // This gets '93f44' from 'Bug - 93f44'
+            
+            // Send the DELETE request to the backend with the cleaned ID
             const response = await fetch(`${API_BASE_URL}/delete_bug/${bugId}`, {
                 method: 'DELETE',
             });
-
+            
             if (response.ok) {
                 setBugs(bugs.filter((bug) => bug.id !== id));
             } else {
@@ -94,40 +102,6 @@ const Dashboard = () => {
         } catch (error) {
             console.error('Error deleting bug:', error);
         }
-    };
-
-    // Helper functions for rendering table cells
-    const renderEditableField = (field, value, onChange) => {
-        return (
-            <input
-                type="text"
-                value={value}
-                onChange={(e) => onChange({ ...editingBug, [field]: e.target.value })}
-            />
-        );
-    };
-
-    const renderEditableDate = (value, onChange) => {
-        return (
-            <input
-                type="date"
-                value={value}
-                onChange={(e) => onChange({ ...editingBug, date: e.target.value })}
-            />
-        );
-    };
-
-    const renderEditableSelect = (field, value, options, onChange) => {
-        return (
-            <select
-                value={value}
-                onChange={(e) => onChange({ ...editingBug, [field]: e.target.value })}
-            >
-                {options.map((option) => (
-                    <option key={option} value={option}>{option}</option>
-                ))}
-            </select>
-        );
     };
 
     return (
@@ -157,40 +131,100 @@ const Dashboard = () => {
                                 <tr key={bug.id}>
                                     <td>{bug.id}</td>
                                     <td>
-                                        {editingBug && editingBug.id === bug.id
-                                            ? renderEditableField('title', editingBug.title, setEditingBug)
-                                            : bug.title}
+                                        {editingBug && editingBug.id === bug.id ? (
+                                            <input
+                                                type="text"
+                                                value={editingBug.title}
+                                                onChange={(e) =>
+                                                    setEditingBug({ ...editingBug, title: e.target.value })
+                                                }
+                                            />
+                                        ) : (
+                                            bug.title
+                                        )}
                                     </td>
                                     <td>
-                                        {editingBug && editingBug.id === bug.id
-                                            ? renderEditableField('description', editingBug.description, setEditingBug)
-                                            : bug.description}
+                                        {editingBug && editingBug.id === bug.id ? (
+                                            <input
+                                                type="text"
+                                                value={editingBug.description}
+                                                onChange={(e) =>
+                                                    setEditingBug({ ...editingBug, description: e.target.value })
+                                                }
+                                            />
+                                        ) : (
+                                            bug.description
+                                        )}
                                     </td>
                                     <td>
-                                        {editingBug && editingBug.id === bug.id
-                                            ? renderEditableDate(editingBug.date, setEditingBug)
-                                            : bug.date}
+                                        {editingBug && editingBug.id === bug.id ? (
+                                            <input
+                                                type="date"
+                                                value={editingBug.date}
+                                                onChange={(e) =>
+                                                    setEditingBug({ ...editingBug, date: e.target.value })
+                                                }
+                                            />
+                                        ) : (
+                                            bug.date
+                                        )}
                                     </td>
                                     <td>
-                                        {editingBug && editingBug.id === bug.id
-                                            ? renderEditableSelect('status', editingBug.status, ['Open', 'In Progress', 'Closed'], setEditingBug)
-                                            : bug.status}
+                                        {editingBug && editingBug.id === bug.id ? (
+                                            <select
+                                                value={editingBug.status}
+                                                onChange={(e) =>
+                                                    setEditingBug({ ...editingBug, status: e.target.value })
+                                                }
+                                            >
+                                                <option value="Open">Open</option>
+                                                <option value="In Progress">In Progress</option>
+                                                <option value="Closed">Closed</option>
+                                            </select>
+                                        ) : (
+                                            bug.status
+                                        )}
                                     </td>
                                     <td>
-                                        {editingBug && editingBug.id === bug.id
-                                            ? renderEditableSelect('priority', editingBug.priority, ['Low', 'Medium', 'High'], setEditingBug)
-                                            : bug.priority}
+                                        {editingBug && editingBug.id === bug.id ? (
+                                            <select
+                                                value={editingBug.priority}
+                                                onChange={(e) =>
+                                                    setEditingBug({ ...editingBug, priority: e.target.value })
+                                                }
+                                            >
+                                                <option value="Low">Low</option>
+                                                <option value="Medium">Medium</option>
+                                                <option value="High">High</option>
+                                            </select>
+                                        ) : (
+                                            bug.priority
+                                        )}
                                     </td>
                                     <td>
                                         {editingBug && editingBug.id === bug.id ? (
                                             <>
-                                                <button onClick={() => saveEdit(editingBug)} className="saveButton">✔️</button>
-                                                <button onClick={handleCancel} className="cancelButton">❌</button>
+                                                <button onClick={() => saveEdit(editingBug)} className="saveButton">
+                                                    ✔️
+                                                </button>
+                                                <button onClick={handleCancel} className="cancelButton">
+                                                    ❌
+                                                </button>
                                             </>
                                         ) : (
                                             <>
-                                                <button onClick={() => startEditing(bug)} className="editButton">✏️</button>
-                                                <button onClick={() => deleteBug(bug.id)} className="deleteButton">🗑️</button>
+                                                <button
+                                                    onClick={() => startEditing(bug)}
+                                                    className="editButton"
+                                                >
+                                                    ✏️
+                                                </button>
+                                                <button
+                                                    onClick={() => deleteBug(bug.id)}
+                                                    className="deleteButton"
+                                                >
+                                                    🗑️
+                                                </button>
                                             </>
                                         )}
                                     </td>
