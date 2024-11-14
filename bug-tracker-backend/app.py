@@ -5,11 +5,17 @@ import os
 import uuid
 from dotenv import load_dotenv
 from bson import ObjectId
+from flask_wtf.csrf import CSRFProtect
+
 
 load_dotenv()
 
 app = Flask(__name__, static_folder = 'build', static_url_path = '/build')
-CORS(app, resources = {r"/*": {"origins": "*"}})
+# Initialize CSRF protection
+csrf = CSRFProtect(app)
+
+allowed_origins = os.getenv("ALLOWED_ORIGINS", "").split(",")
+CORS(app, resources = {r"/*": {"origins": allowed_origins}})
 
 # Configure MongoDB URI from .env
 app.config["MONGO_URI"] = os.getenv("MONGO_URI")
