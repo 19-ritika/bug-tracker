@@ -4,10 +4,10 @@ import NavBar from './Components/NavBar';
 import Dashboard from './Components/Dashboard';
 import Login from './Auth/Login';
 import Register from './Auth/Register';
-import ForgotPassword from './Auth/ForgotPassword';  // Import ForgotPassword
+import ForgotPassword from './Auth/ForgotPassword';  
 import { AuthProvider } from './Auth/AuthContext';
 import PrivateRoute from './Components/PrivateRoute';
-
+// function that sets up routing for navigation between pages, authentication data, private route for dasboard page
 function App() {
     return (
         <Router>

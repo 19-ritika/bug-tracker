@@ -8,7 +8,6 @@ function Logout() {
     const handleLogout = async () => {
         try {
             await logout();
-            alert('Logged out successfully!');
         } catch (error) {
             console.error('Failed to log out:', error.message);
         }

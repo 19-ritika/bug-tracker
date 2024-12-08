@@ -25,7 +25,7 @@ input[type="email"], input[type="password"] {
     padding: 12px;
     margin-bottom: 16px;
     font-size: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid #121212;
     border-radius: 6px;
     width: 100%;
     box-sizing: border-box;
@@ -40,7 +40,8 @@ input[type="email"]:focus, input[type="password"]:focus {
 /* Button Styling */
 #loginBtn, #registerBtn {
     padding: 14px;
-    font-size: 16px;
+    font-size: 20px;
+    font-weight: bold;
     border: none;
     border-radius: 6px;
     background-color: #007BFF;

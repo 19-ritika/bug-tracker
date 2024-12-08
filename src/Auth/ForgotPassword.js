@@ -23,6 +23,7 @@ function ForgotPassword() {
         <div id = 'forgotDiv'>
             <h2>Forgot Password</h2>
             <form id = 'forgotForm' onSubmit={handleSubmit}>
+            <p style= {{color: 'red', fontSize: '14px'}}>Enter valid email address to receive reset link on your email</p>
                 <input
                     type="email"
                     placeholder="Enter your email"

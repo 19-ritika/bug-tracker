@@ -1,29 +1,29 @@
-/* Container for the navigation bar */
+
 .nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
-    background-color: #d23111;
+    background-color: #849fa0ef;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
     display: flex;
     align-items: center;
-    cursor: pointer; /* Make logo clickable to go to the dashboard */
+    cursor: pointer; 
 }
 
 .image {
-    width: 40px; /* Adjust the size of the bug image */
+    width: 40px; 
     height: 40px;
-    margin-right: 10px; /* Space between the icon and the text */
+    margin-right: 10px; 
 }
 
 .title {
     font-size: 1.5rem;
     color: #333;
-    margin: 0; /* Remove default margin from h2 */
+    margin: 0; 
 }
 
 .logoutButton {

@@ -1,15 +1,21 @@
-/* src/components/Dashboard.css */
+
 .dashboard {
+    width:80%;
+    margin-left: 15%;
     padding: 1rem;
     text-align: center;
 }
 
+#bugHead{
+    margin-right: 30%;
+}
+
 .addBugButton {
-    background-color: #28a745; /* Green color */
+    background-color: #28a745; 
     color: white;
     border: none;
     padding: 10px 15px;
-    margin-bottom: 1rem; /* Space between button and table */
+    margin-bottom: 1rem; 
     cursor: pointer;
     font-size: 16px;
     border-radius: 5px;
@@ -17,52 +23,52 @@
 }
 
 .addBugButton:hover {
-    background-color: #218838; /* Darker green on hover */
+    background-color: #218838; 
 }
 
 .bugTable {
-    width: 100%;
+    width: 80%;
     border-collapse: collapse;
     margin: 1rem 0;
 }
 
 .bugTable th, .bugTable td {
-    border: 1px solid #ddd;
+    border: 1px solid #474444;
     padding: 10px;
     text-align: left;
 }
 
 .bugTable th {
-    background-color: #f2f2f2;
+    background-color: #b0a7a7;
     font-weight: bold;
 }
 
 .bugTable tr:nth-child(even) {
-    background-color: #f9f9f9; /* Alternate row color */
+    background-color: #f9f9f9; 
 }
 
 .bugTable tr:hover {
-    background-color: #f1f1f1; /* Highlight on hover */
+    background-color: #f1f1f1; 
 }
 
-/* Align the edit and delete icons */
+
 td .editButton, td .deleteButton {
-    margin-right: 5px; /* Space between icons */
-    font-size: 18px; /* Size of icons */
-    cursor: pointer; /* Pointer cursor for interactivity */
-    vertical-align: middle; /* Align icons vertically in the row */
+    margin-right: 5px; 
+    font-size: 18px; 
+    cursor: pointer; 
+    vertical-align: middle; 
     border: None;
 }
 
 td .editIcon:hover {
-    color: #007bff; /* Hover color for edit icon */
+    color: #007bff; 
 }
 
 td .deleteIcon:hover {
-    color: #dc3545; /* Hover color for delete icon */
+    color: #dc3545; 
 }
 
-/* Optional: Style for the save and cancel buttons */
+
 .saveButton, .cancelButton {
     font-size: 18px;
     margin-right: 8px;
@@ -80,5 +86,5 @@ td .deleteIcon:hover {
 }
 
 .saveButton:hover, .cancelButton:hover {
-    opacity: 0.7; /* Slight transparency on hover */
+    opacity: 0.7; 
 }

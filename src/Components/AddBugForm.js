@@ -1,30 +1,107 @@
 import React, { useState } from 'react';
 import './AddBugForm.css';
 
+// Add bug form where users add bug details
 const AddBugForm = ({ onAddBug, onCancel }) => {
     const [bug, setBug] = useState({
         title: '',
         description: '',
         status: '',
         priority: '',
-        date: '', // Set date to an empty string for manual input
+        date: '', 
     });
 
+    // Adding state for error messages
+    const [errors, setErrors] = useState({
+        title: '',
+        description: '',
+        status: '',
+        priority: '',
+        date: ''
+    });
+
+    // function when user gives an input, it updates field in bug state
     const handleChange = (e) => {
         const { name, value } = e.target;
+
+        // For title, ensure only text (letters and spaces) are allowed
+        if (name === 'title' && !/^[a-zA-Z\s]*$/.test(value)) {
+            setErrors((prevErrors) => ({
+                ...prevErrors,
+                title: 'Title should only contain letters and spaces!'
+            }));
+            return; // Stop further processing
+        }
+
         setBug((prevBug) => ({
             ...prevBug,
             [name]: value,
         }));
+
+        // Clear the error message for the specific field when user starts typing
+        setErrors((prevErrors) => ({
+            ...prevErrors,
+            [name]: ''
+        }));
     };
 
+    // Function to validate the form fields
+    const validateForm = () => {
+        let formIsValid = true;
+        let newErrors = {};
+
+        // Check if title is empty or exceeds 20 characters
+        if (!bug.title) {
+            formIsValid = false;
+            newErrors.title = "Title is required!";
+        } else if (bug.title.length > 20) {
+            formIsValid = false;
+            newErrors.title = "Title cannot exceed 20 characters!";
+        }
+
+        // Check if description is empty or exceeds 50 characters
+        if (!bug.description) {
+            formIsValid = false;
+            newErrors.description = "Description is required!";
+        } else if (bug.description.length > 50) {
+            formIsValid = false;
+            newErrors.description = "Description cannot exceed 50 characters!";
+        }
+
+        // Check if status is selected
+        if (!bug.status) {
+            formIsValid = false;
+            newErrors.status = "Status is required!";
+        }
+
+        // Check if priority is selected
+        if (!bug.priority) {
+            formIsValid = false;
+            newErrors.priority = "Priority is required!";
+        }
+
+        // Check if date is selected
+        if (!bug.date) {
+            formIsValid = false;
+            newErrors.date = "Date is required!";
+        }
+
+        setErrors(newErrors);
+        return formIsValid;
+    };
+
+    // Function used when form is submitted
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Pass the bug object without the ID to the parent
-        onAddBug(bug);
+
+        // Validate the form before submitting
+        if (validateForm()) {
+            onAddBug(bug); // If valid, call the parent function to add the bug
+        }
     };
 
     return (
+        // form to fill in bug details
         <form className="addBugForm" onSubmit={handleSubmit}>
             <div className="formGroup">
                 <label htmlFor="title">Title</label>
@@ -35,7 +112,9 @@ const AddBugForm = ({ onAddBug, onCancel }) => {
                     value={bug.title}
                     onChange={handleChange}
                     required
+                    maxLength={20} // Limit to 20 characters
                 />
+                {errors.title && <span className="error">{errors.title}</span>}
             </div>
 
             <div className="formGroup">
@@ -47,7 +126,9 @@ const AddBugForm = ({ onAddBug, onCancel }) => {
                     value={bug.description}
                     onChange={handleChange}
                     required
+                    maxLength={50} // Limit to 50 characters
                 />
+                {errors.description && <span className="error">{errors.description}</span>}
             </div>
 
             <div className="formGroup">
@@ -64,6 +145,7 @@ const AddBugForm = ({ onAddBug, onCancel }) => {
                     <option value="In Progress">In Progress</option>
                     <option value="Closed">Closed</option>
                 </select>
+                {errors.status && <span className="error">{errors.status}</span>}
             </div>
 
             <div className="formGroup">
@@ -80,18 +162,20 @@ const AddBugForm = ({ onAddBug, onCancel }) => {
                     <option value="Medium">Medium</option>
                     <option value="High">High</option>
                 </select>
+                {errors.priority && <span className="error">{errors.priority}</span>}
             </div>
 
             <div className="formGroup">
                 <label htmlFor="date">Date</label>
                 <input
-                    type="date" // Change input type to date
+                    type="date"
                     id="date"
                     name="date"
                     value={bug.date}
                     onChange={handleChange}
                     required
                 />
+                {errors.date && <span className="error">{errors.date}</span>}
             </div>
 
             <div className="formGroup">

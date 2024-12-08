@@ -6,6 +6,7 @@ import './Auth.css';
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');  // State for error message
     const { login } = useAuth();
     const navigate = useNavigate();
 
@@ -13,9 +14,10 @@ function Login() {
         e.preventDefault();
         try {
             await login(email, password);
-            alert('Logged in successfully!');
             navigate('/dashboard');
         } catch (error) {
+            // Set the error message to be displayed on the page
+            setErrorMessage(error.message);  // Show error message on page
             console.error('Failed to log in:', error.message);
         }
     };
@@ -41,6 +43,13 @@ function Login() {
                     />
                     <button id='loginBtn' type="submit">Login</button>
                 </form>
+                
+                {errorMessage && (
+                    <div className="error-message" style={{ color: 'red' }}>
+                        <p>{errorMessage}</p>  {/* Display the error message */}
+                    </div>
+                )}
+
                 <p>
                     <b><a href="/forgot-password" style = {{color: 'black'}}>Forgot Password?</a></b>
                 </p>
