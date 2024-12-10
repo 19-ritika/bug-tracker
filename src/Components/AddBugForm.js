@@ -11,7 +11,7 @@ const AddBugForm = ({ onAddBug, onCancel }) => {
         date: '', 
     });
 
-    // Adding state for error messages
+    // Add state for error messages
     const [errors, setErrors] = useState({
         title: '',
         description: '',
@@ -24,13 +24,13 @@ const AddBugForm = ({ onAddBug, onCancel }) => {
     const handleChange = (e) => {
         const { name, value } = e.target;
 
-        // For title, ensure only text (letters and spaces) are allowed
+        // For title, only text (letters and spaces) are allowed
         if (name === 'title' && !/^[a-zA-Z\s]*$/.test(value)) {
             setErrors((prevErrors) => ({
                 ...prevErrors,
                 title: 'Title should only contain letters and spaces!'
             }));
-            return; // Stop further processing
+            return; 
         }
 
         setBug((prevBug) => ({
@@ -38,7 +38,6 @@ const AddBugForm = ({ onAddBug, onCancel }) => {
             [name]: value,
         }));
 
-        // Clear the error message for the specific field when user starts typing
         setErrors((prevErrors) => ({
             ...prevErrors,
             [name]: ''
@@ -90,7 +89,7 @@ const AddBugForm = ({ onAddBug, onCancel }) => {
         return formIsValid;
     };
 
-    // Function used when form is submitted
+    // handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -112,7 +111,7 @@ const AddBugForm = ({ onAddBug, onCancel }) => {
                     value={bug.title}
                     onChange={handleChange}
                     required
-                    maxLength={20} // Limit to 20 characters
+                    maxLength={20} 
                 />
                 {errors.title && <span className="error">{errors.title}</span>}
             </div>
@@ -126,7 +125,6 @@ const AddBugForm = ({ onAddBug, onCancel }) => {
                     value={bug.description}
                     onChange={handleChange}
                     required
-                    maxLength={50} // Limit to 50 characters
                 />
                 {errors.description && <span className="error">{errors.description}</span>}
             </div>
@@ -180,10 +178,11 @@ const AddBugForm = ({ onAddBug, onCancel }) => {
 
             <div className="formGroup">
                 <button type="submit">Add Bug</button>
-                <button type="button" onClick={onCancel}>Cancel</button>
+                <button style = {{color : 'green'}} type="button" onClick={onCancel}>Cancel</button>
             </div>
         </form>
     );
 };
 
 export default AddBugForm;
+

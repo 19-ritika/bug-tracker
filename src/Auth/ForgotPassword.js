@@ -3,15 +3,17 @@ import { useAuth } from './AuthContext';
 import { Link } from 'react-router-dom';
 import './Auth.css';
 
+// function for forgot password component
 function ForgotPassword() {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const { resetPassword } = useAuth();
 
+    // handler function for form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await resetPassword(email);
+            await resetPassword(email); //send email to user
             setMessage('Password reset email sent! Check your inbox.');
         } catch (error) {
             setMessage('Failed to reset password. Please try again.');
@@ -33,7 +35,7 @@ function ForgotPassword() {
                 />
                 <button id = 'resetBtn' type="submit">Reset Password</button>
                 <br />
-                <button id = 'forgotBtn'><Link to="/login" style={{ textDecoration: 'none', color: 'inherit' }}>Log in</Link></button>
+                <button style ={{color : 'green'}} id = 'ForgotLoginBtn'><Link to="/login" style={{ textDecoration: 'none', color: 'inherit' }}>Log in</Link></button>
                 
             </form>
             {message && <p id="message">{message}</p>}

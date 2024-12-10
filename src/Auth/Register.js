@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import { useAuth } from './AuthContext';  // Import useAuth hook
+import { useAuth } from './AuthContext';  
 import './Auth.css';
 
+// register funciton
 function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
-    const { register } = useAuth();  // Access register function from context
+    const { register } = useAuth();  
 
+    // handler for form submisison
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -18,17 +20,18 @@ function Register() {
 
         try {
             setError('');
-            await register(email, password);  // Call register function from context
-            alert('Registration successful!');  // Optional alert for successful registration
-            setEmail('');  // Clear form fields
+            await register(email, password);  
+            alert('Registration successful!');  
+            setEmail('');  
             setPassword('');
             setConfirmPassword('');
         } catch (error) {
-            setError(error.message);  // Handle errors, e.g., invalid email/password
+            setError(error.message);  
         }
     };
 
     return (
+        // register html component
         <div>
             <div id ='registerComp'>
                 <h2>Register</h2>

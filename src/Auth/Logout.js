@@ -1,7 +1,7 @@
-// src/auth/Logout.js
 import React from 'react';
 import { useAuth } from './AuthContext';
 
+//logout function
 function Logout() {
     const { logout } = useAuth();
 

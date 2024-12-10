@@ -37,7 +37,6 @@ input[type="email"]:focus, input[type="password"]:focus {
     outline: none;
 }
 
-/* Button Styling */
 #loginBtn, #registerBtn {
     padding: 14px;
     font-size: 20px;
@@ -47,11 +46,11 @@ input[type="email"]:focus, input[type="password"]:focus {
     background-color: #007BFF;
     color: white;
     cursor: pointer;
-    width: 100%; /* Full width */
+    width: 100%; 
     transition: background-color 0.3s ease;
 }
 
-/* Button Hover and Active States */
+
 #loginBtn:hover, #registerBtn:hover {
     background-color: #0056b3;
 }
@@ -90,7 +89,7 @@ h2, p{
     background-color: #007BFF;
     color: white;
     cursor: pointer;
-    width: 100%; /* Full width */
+    width: 100%; 
     transition: background-color 0.3s ease;
 }
 
@@ -98,10 +97,10 @@ h2, p{
     background-color: #0056b3;
 }
 
-/* New styling for the message */
+
 #message {
     margin-top: 10px;
     font-size: 14px;
-    color: #28a745; /* Green color for success */
+    color: #28a745; 
     font-weight: bold;
 }

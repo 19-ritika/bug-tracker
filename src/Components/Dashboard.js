@@ -16,7 +16,7 @@ const Dashboard = () => {
         fetchBugs();
     }, []); 
 
-    // function to fetch bugs runs when new bugs are added or edited
+    // function to fetch bugs
     const fetchBugs = async () => {
         try {
             const response = await fetch(`${API_BASE_URL}/get_bugs`);
@@ -30,7 +30,7 @@ const Dashboard = () => {
             console.error('Error fetching bugs:', error);
         }
     };
-    // function for submitting add bug form
+    // function for submitting add bug 
     const addBug = async (bug) => {
         try {
             const response = await fetch(`${API_BASE_URL}/add_bug`, {
@@ -48,25 +48,21 @@ const Dashboard = () => {
             console.error('Error adding bug:', error);
         }
     };
-    // cancels form or any edit actions
+    // cancel edit function
     const handleCancel = () => {
         setShowAddBugForm(false);
         setEditingBug(null); 
     };
-    // function when user clicks edit button for bug
+    // start edit function
     const startEditing = (bug) => {
         setEditingBug(bug);
     };
-    // function for saving the changes done to a bug
+    // save edit function
     const saveEdit = async (bug) => {
         try {
             
             const cleanedId = bug.id.split(' - ')[1];  
-    
-            
             const updatedBug = { ...bug, id: cleanedId };
-    
-            
             const response = await fetch(`${API_BASE_URL}/edit_bug/${cleanedId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },

@@ -4,7 +4,7 @@ import { Navigate } from 'react-router-dom';
 import { useAuth } from '../Auth/AuthContext';
 // component that enables only logged in users to access certain pages
 const PrivateRoute = ({ element, ...rest }) => {
-    const { currentUser } = useAuth();  // Get the currentUser from AuthContext
+    const { currentUser } = useAuth();  
 
     return currentUser ? element : <Navigate to="/login" />;
 };

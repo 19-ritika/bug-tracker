@@ -7,14 +7,16 @@ import Register from './Auth/Register';
 import ForgotPassword from './Auth/ForgotPassword';  
 import { AuthProvider } from './Auth/AuthContext';
 import PrivateRoute from './Components/PrivateRoute';
-// function that sets up routing for navigation between pages, authentication data, private route for dasboard page
+
+//main app function
 function App() {
     return (
         <Router>
-            <AuthProvider>
+            <AuthProvider> {/*for Auth Context*/}
                 <div className="App">
                     <NavBar />
                     <Routes>
+                        {/*App routes*/}
                         <Route path="/" element={<Login />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />

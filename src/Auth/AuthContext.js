@@ -3,15 +3,16 @@ import { auth } from './FirebaseConfigs';
 import { onAuthStateChanged, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
+// create auth context
 const AuthContext = createContext();
-
+// Hook for easy access to the AuthContext
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
-
+    // Check authentication status when the app loads
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             setCurrentUser(user);
@@ -20,27 +21,27 @@ export const AuthProvider = ({ children }) => {
         return unsubscribe;
     }, []);
 
-    // Memoize the functions to avoid recreating them on every render
+     // Function to register 
     const register = useCallback((email, password) => {
         return createUserWithEmailAndPassword(auth, email, password)
             .then(() => {
                 navigate('/login');
             });
     }, [navigate]);
-
+    //function to login 
     const login = useCallback((email, password) => {
         return signInWithEmailAndPassword(auth, email, password);
     }, []);
-
+    //function to logout
     const logout = useCallback(() => {
         return signOut(auth);
     }, []);
-
+    //function to reset password
     const resetPassword = useCallback((email) => {
         return sendPasswordResetEmail(auth, email);
     }, []);
 
-    // Memoize the context value to avoid re-creating the object on each render
+    // Prepare the values to share in the context
     const value = useMemo(() => ({
         currentUser,
         register,

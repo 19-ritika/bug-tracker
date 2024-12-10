@@ -3,21 +3,21 @@ import { useAuth } from './AuthContext';
 import { useNavigate } from 'react-router-dom';
 import './Auth.css'; 
 
+// login function
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');  // State for error message
+    const [errorMessage, setErrorMessage] = useState('');  
     const { login } = useAuth();
     const navigate = useNavigate();
-
+    //handler for form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             await login(email, password);
-            navigate('/dashboard');
+            navigate('/dashboard'); //redirect to dashboard after login
         } catch (error) {
-            // Set the error message to be displayed on the page
-            setErrorMessage(error.message);  // Show error message on page
+            setErrorMessage(error.message); 
             console.error('Failed to log in:', error.message);
         }
     };
@@ -46,7 +46,7 @@ function Login() {
                 
                 {errorMessage && (
                     <div className="error-message" style={{ color: 'red' }}>
-                        <p>{errorMessage}</p>  {/* Display the error message */}
+                        <p>{errorMessage}</p>  
                     </div>
                 )}
 

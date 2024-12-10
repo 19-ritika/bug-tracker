@@ -16,10 +16,10 @@ const NavBar = () => {
             console.error('Failed to log out:', error.message);
         }
     };
-    // Navbar component creates the top menu bar for the app
+    // Navbar component creates the top menu bar
     return (
         <nav className="nav">
-            <div className="logo" onClick={() => navigate('/dashboard')}>  {/* Make the logo clickable */}
+            <div className="logo" onClick={() => navigate('/dashboard')}>  
                 <img src="/bugImage.png" alt="Bug Tracker Logo" className="image" />
                 <h2 className="title">Bug Tracker</h2>
             </div>
