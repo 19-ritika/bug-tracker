@@ -11,7 +11,7 @@
 }
 
 .addBugButton {
-    background-color: #2a7bb6; 
+    background-color: #218721; 
     color: white;
     border: none;
     padding: 10px 15px;
@@ -23,7 +23,7 @@
 }
 
 .addBugButton:hover {
-    background-color: #218838; 
+    background-color: #2e753f; 
 }
 
 .bugTable {

@@ -178,7 +178,7 @@ const AddBugForm = ({ onAddBug, onCancel }) => {
 
             <div className="formGroup">
                 <button type="submit">Add Bug</button>
-                <button style = {{color : 'green'}} type="button" onClick={onCancel}>Cancel</button>
+                <button style = {{backgroundColor: 'red'}} type="button" onClick={onCancel}>Cancel</button>
             </div>
         </form>
     );

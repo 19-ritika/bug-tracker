@@ -39,7 +39,7 @@
     width: 50%;
     margin-left: 25%;
     margin-bottom: 5px;
-    background-color: #007bff; 
+    background-color: #007BFF; 
     color: white; 
     border: none; 
     padding: 10px; 
@@ -47,5 +47,9 @@
 }
 
 .addBugForm button:hover {
-    background-color: #0056b3; 
+    background-color: #62a7f1; 
+}
+
+#redBtn{
+    background-color: red;
 }

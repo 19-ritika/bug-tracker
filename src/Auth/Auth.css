@@ -79,7 +79,7 @@ h2, p{
     padding: 20px;
 }
 
-#forgotBtn, #resetBtn{
+#ForgotLoginBtn{
    margin-top: 5px;
    margin-bottom: 5px;
    padding: 14px;
@@ -92,6 +92,20 @@ h2, p{
     width: 100%; 
     transition: background-color 0.3s ease;
 }
+
+#resetBtn{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 14px;
+    font-size: 16px;
+     border: none;
+     border-radius: 6px;
+     background-color: #007BFF;
+     color: white;
+     cursor: pointer;
+     width: 100%; 
+     transition: background-color 0.3s ease;
+ }
 
 #forgotBtn:hover, #resetBtn:hover {
     background-color: #0056b3;

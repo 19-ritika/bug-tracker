@@ -35,7 +35,7 @@ function ForgotPassword() {
                 />
                 <button id = 'resetBtn' type="submit">Reset Password</button>
                 <br />
-                <button style ={{color : 'green'}} id = 'ForgotLoginBtn'><Link to="/login" style={{ textDecoration: 'none', color: 'inherit' }}>Log in</Link></button>
+                <button id = 'ForgotLoginBtn'><Link to="/login" style={{ textDecoration: 'none', color: 'inherit' }}>Log in</Link></button>
                 
             </form>
             {message && <p id="message">{message}</p>}
