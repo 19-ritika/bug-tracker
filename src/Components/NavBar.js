@@ -20,8 +20,7 @@ const NavBar = () => {
     return (
         <nav className="nav">
             <div className="logo" onClick={() => navigate('/dashboard')}>  
-                <img src="/bugImage.png" alt="Bug Tracker Logo" className="image" />
-                <h2 className="title">Bug Tracker</h2>
+                <h2 className="title">Bug-Tracker</h2>
             </div>
             {currentUser && (  
                 <button className="logoutButton" onClick={handleLogout}>Logout</button>

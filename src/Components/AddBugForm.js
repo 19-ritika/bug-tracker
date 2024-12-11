@@ -158,7 +158,8 @@ const AddBugForm = ({ onAddBug, onCancel }) => {
                     <option value="">Select Priority</option>
                     <option value="Low">Low</option>
                     <option value="Medium">Medium</option>
-                    <option value="High">High</option>
+                    <option value="Urgent">Urgent</option>
+
                 </select>
                 {errors.priority && <span className="error">{errors.priority}</span>}
             </div>

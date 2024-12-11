@@ -11,9 +11,7 @@ from flask_wtf.csrf import CSRFProtect
 load_dotenv()
 
 app = Flask(__name__, static_folder = 'build', static_url_path = '/build')
-
-# Initialize CSRF protection
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY') # Initialize CSRF protection
 
 # CORS policies
 allowed_origins = os.getenv("ALLOWED_ORIGINS", "").split(",")
