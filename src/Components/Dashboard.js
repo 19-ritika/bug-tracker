@@ -107,9 +107,9 @@ const Dashboard = () => {
             ) : (
                 <>
                     <button className="addBugButton" onClick={() => setShowAddBugForm(true)}>
-                        Add-Bug
+                        Add Bug
                     </button>
-                    <h2 id = 'bugHead'>Bug-List </h2>
+                    <h2 id = 'bugHead'>Bug List </h2>
                     <table className="bugTable">
                         <thead>
                             <tr>
