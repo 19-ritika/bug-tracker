@@ -20,7 +20,7 @@ const NavBar = () => {
     return (
         <nav className="nav">
             <div className="logo" onClick={() => navigate('/dashboard')}>  
-                <h2 className="title">Bug Tracker</h2>
+                <h2 className="title">Bug Squasher</h2>
             </div>
             {currentUser && (  
                 <button className="logoutButton" onClick={handleLogout}>Logout</button>
@@ -30,3 +30,4 @@ const NavBar = () => {
 };
 
 export default NavBar;
+// style = {{color: 'red', fontSize: '10px', fontWeight: 'bold', fontFamily: 'Arial', fontStyle: 'italic'}} 
